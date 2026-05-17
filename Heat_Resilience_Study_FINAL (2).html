@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heat-Resilient Affordable Housing, Atlanta Feasibility Study</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f2ed;--card:#fff;--dark:#1a2e28;--gd:#2d4a3e;--gm:#5b9279;--gl:#8fbf9f;--gp:#d0e8d8;--or:#e07333;--bl:#3d8db5;--gr:#6b7b75;--grl:#b0bab5;--bor:#e0ddd7;--qbg:#faf8f5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);line-height:1.6}
+.hero{background:linear-gradient(135deg,var(--gd) 0%,#1a3a30 60%,#0f2a20 100%);color:#fff;padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(91,146,121,.15) 0%,transparent 70%);border-radius:50%}
+.hero h1{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:800;letter-spacing:-.02em;max-width:800px;position:relative}
+.hero .sub{margin-top:.5rem;font-size:1rem;color:rgba(255,255,255,.7);max-width:650px;font-weight:300}
+.hero .by{margin-top:1.25rem;font-size:.85rem;color:rgba(255,255,255,.45);letter-spacing:.04em}
+.hero .sr{display:flex;gap:2.5rem;margin-top:2rem;flex-wrap:wrap}
+.hero .st{text-align:center}
+.hero .sn{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--gl)}
+.hero .sl{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-top:.15rem}
+.con{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+@media(max-width:768px){.g2{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:12px;padding:1.75rem;box-shadow:0 1px 3px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.04);border:1px solid var(--bor)}
+.card h3{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gr);margin-bottom:1rem}
+.tag{display:inline-block;font-size:.63rem;padding:2px 8px;border-radius:99px;margin-left:8px;font-weight:500;letter-spacing:0;text-transform:none;vertical-align:middle}
+.tg{background:var(--gp);color:var(--gd)}.to{background:#fde8d4;color:#a85a2a}.tb{background:#d4e8f5;color:#2a6a8b}.tp{background:#e8daf5;color:#5a2a8b}
+.cc{position:relative;height:280px;width:100%}
+.sl2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gd);margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gp)}
+.ib{background:linear-gradient(135deg,var(--gd),#1a3a30);color:#fff;border-radius:12px;padding:2rem;margin:1.5rem 0;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
+.ii{font-size:2rem;width:56px;height:56px;background:rgba(255,255,255,.1);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.ib h4{font-weight:700;font-size:1rem;margin-bottom:.4rem;color:var(--gl)}
+.ib p{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.6}
+.qc{background:var(--qbg);border-left:4px solid var(--gm);border-radius:0 12px 12px 0;padding:1.5rem 1.75rem;margin-bottom:1rem}
+.qc.or{border-left-color:var(--or)}.qc.bl{border-left-color:var(--bl)}
+.qc blockquote{font-size:.95rem;font-style:italic;color:#3a4a44;line-height:1.7;margin-bottom:.6rem}
+.qc .at{font-size:.75rem;color:var(--gr);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.vl{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:99px;margin-bottom:.5rem}
+.vr{background:#d4e8f5;color:#2a6a8b}.lk{background:#fde8d4;color:#a85a2a}.vs{background:#e8daf5;color:#5a2a8b}
+.ip{background:var(--card);border-radius:12px;padding:2rem;box-shadow:0 1px 3px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.04);border:1px solid var(--bor);margin-bottom:1.5rem}
+.ip h3{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gr);margin-bottom:1.25rem}
+.rr{display:flex;gap:1rem;margin-bottom:.5rem}
+.rb{flex-shrink:0;width:8px;height:8px;border-radius:50%;margin-top:8px}
+.rb.a{background:var(--gm)}.rb.b{background:var(--or)}
+.rt{font-size:.88rem;color:#4a5a54;line-height:1.6}
+.ssg{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0}
+@media(max-width:768px){.ssg{grid-template-columns:1fr}}
+.ss{text-align:center;padding:1.25rem;background:var(--qbg);border-radius:10px}
+.ss .n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gd)}
+.ss .l{font-size:.75rem;color:var(--gr);margin-top:.2rem;line-height:1.4}
+.mc{background:var(--card);border-radius:12px;padding:2rem;box-shadow:0 1px 3px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.04);border:1px solid var(--bor);margin-bottom:1.5rem}
+.mc h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gd);margin-bottom:.75rem}
+.mc p{font-size:.88rem;color:var(--gr);line-height:1.7}
+.mg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1rem}
+@media(max-width:768px){.mg{grid-template-columns:1fr}}
+.mi{padding:1rem;background:var(--qbg);border-radius:8px;text-align:center}
+.mi .ic{font-size:1.5rem;margin-bottom:.4rem}
+.mi .ti{font-weight:700;font-size:.85rem;color:var(--dark)}
+.mi .de{font-size:.75rem;color:var(--gr);margin-top:.2rem}
+.cr{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.75rem}
+.ch{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .9rem;background:var(--qbg);border-radius:99px;font-size:.78rem;color:var(--gr);border:1px solid var(--bor)}
+.ch .d{width:8px;height:8px;border-radius:50%;background:var(--gm)}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:.5rem}
+@media(max-width:768px){.fg{grid-template-columns:1fr}}
+.fi p:first-child{font-weight:700;color:var(--gd);font-size:.9rem;margin-bottom:.3rem}
+.fi p:last-child{font-size:.88rem;color:var(--gr);line-height:1.7}
+.fn{font-size:.75rem;color:var(--grl);margin-top:2rem;padding-top:1rem;border-top:1px solid var(--bor);line-height:1.8}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Heat-Resilient Affordable Housing in Atlanta</h1>
+  <p class="sub">Can Atlanta build housing that is both affordable and resilient to extreme heat? A feasibility study combining project data, cost analysis, and firsthand perspectives from developers and public agencies.</p>
+  <p class="by">Owen Hahn &middot; The Lovett School &middot; Independent Study, Spring 2026</p>
+  <div class="sr">
+    <div class="st"><div class="sn">20</div><div class="sl">Projects Analyzed</div></div>
+    <div class="st"><div class="sn">9.1</div><div class="sl">Avg Resilience Score</div></div>
+    <div class="st"><div class="sn">60%</div><div class="sl">Cost-Burdened</div></div>
+    <div class="st"><div class="sn">5</div><div class="sl">Industry Contacts</div></div>
+  </div>
+</div>
+<div class="con">
+
+<div class="sl2">Research Methodology</div>
+<div class="mc">
+  <h3>Mixed-Methods Approach</h3>
+  <p>This study combines quantitative analysis of 20 Atlanta affordable housing developments with qualitative insights from recorded interviews with public agency officials and an industry survey of developers directly involved in these projects.</p>
+  <div class="mg">
+    <div class="mi"><div class="ic">📊</div><div class="ti">Quantitative Data</div><div class="de">20 projects, 41 variables covering cost, resilience features, and affordability metrics</div></div>
+    <div class="mi"><div class="ic">🎤</div><div class="ti">2 Interviews + Survey</div><div class="de">Recorded interviews with Invest Atlanta VP and Atlanta Housing official, plus 2-response developer survey</div></div>
+    <div class="mi"><div class="ic">🏗️</div><div class="ti">Public Records</div><div class="de">Invest Atlanta board resolutions, Atlanta Housing press releases, HUD data, EarthCraft standards</div></div>
+  </div>
+  <div style="margin-top:1rem">
+    <p style="font-size:.78rem;color:var(--gr);font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Interview & Survey Contacts</p>
+    <div class="cr">
+      <div class="ch"><span class="d"></span>Vickey Roberts, VP of Multifamily Housing, Invest Atlanta</div>
+      <div class="ch"><span class="d"></span>Lenny Koltochnik, Atlanta Housing Authority</div>
+      <div class="ch"><span class="d"></span>Inyo Cue, Project Manager III, City of Atlanta</div>
+      <div class="ch"><span class="d"></span>Survey: Developer (City Lights South)</div>
+      <div class="ch"><span class="d"></span>Survey: Developer/Owner/Mgr (Columbia Senior Housing)</div>
+    </div>
+  </div>
+</div>
+
+<div class="sl2">What's Driving Costs in Atlanta Affordable Housing?</div>
+<div class="g2">
+  <div class="qc">
+    <div class="vl vr">Vickey Roberts, Invest Atlanta</div>
+    <blockquote>"The main factor is construction costs are continuing to escalate. Gas prices are going up... wood, concrete, all those things, now those costs are going up. Along with the interest rates, they're not as competitive anymore."</blockquote>
+    <div class="at">Interview, April 30, 2026</div>
+  </div>
+  <div class="qc or">
+    <div class="vl lk">Lenny Koltochnik, Atlanta Housing</div>
+    <blockquote>"If you are in the city of Atlanta, the city limits, it's very expensive to live. Many people are moving in that can afford and many people are moving out to the outskirts... the housing market has just exploded with very high rents."</blockquote>
+    <div class="at">Interview, April 30, 2026</div>
+  </div>
+</div>
+<div class="g2">
+  <div class="card"><h3>How Much of Income Goes to Housing, by Resilience Tier <span class="tag tg">Key Finding</span></h3><div class="cc"><canvas id="c1"></canvas></div></div>
+  <div class="card"><h3>How Much It Costs to Build Each Unit, by Resilience Tier <span class="tag tb">TDC Only</span></h3><div class="cc"><canvas id="c3"></canvas></div></div>
+</div>
+<div class="ib">
+  <div class="ii">💡</div>
+  <div><h4>The Core Tradeoff, Confirmed by Data and Interviews</h4>
+  <p>Higher-resilience projects cost more to build ($226K to $398K per unit) but reduce resident costs through lower utilities. Vickey Roberts confirmed this directly: "Invest now in the construction because it's going to help me later on in operation." She noted efficiency features lower operating expenses, producing a "slightly higher NOI" that stabilizes the property, but acknowledged "financing is a very tight tool" in Atlanta right now.</p></div>
+</div>
+
+<div class="sl2">Energy Efficiency: Present but Not Enough</div>
+<div class="g2">
+  <div class="card"><h3>What Residents Pay in Monthly Utilities, by Resilience Tier <span class="tag to">Savings</span></h3><div class="cc"><canvas id="c2"></canvas></div></div>
+  <div class="card"><h3>How Many Projects Fall in Each Resilience Tier</h3><div class="cc"><canvas id="c4"></canvas></div></div>
+</div>
+<div class="g2">
+  <div class="qc">
+    <div class="vl vr">Vickey Roberts, Invest Atlanta</div>
+    <blockquote>"All these features are often added into the projects that are really kind of financially tight. The systems you pay for pay off over time. So you look at it like, let me invest now in the construction because it's going to help me later on in operation."</blockquote>
+    <div class="at">On why developers still include efficiency features despite tight budgets</div>
+  </div>
+  <div class="qc or">
+    <div class="vl lk">Lenny Koltochnik, Atlanta Housing</div>
+    <blockquote>"There's an area being studied a lot right now called smart technologies. They actually will save money and costs, but the problem is they're very expensive to implement. Most people are not familiar with them and they are not cheap."</blockquote>
+    <div class="at">On the gap between available technology and adoption</div>
+  </div>
+</div>
+<div class="ssg">
+  <div class="ss"><div class="n">100%</div><div class="l">of surveyed developers include<br>high-efficiency HVAC, Low-E windows,<br>insulation, shading & backup power</div></div>
+  <div class="ss"><div class="n">50%</div><div class="l">include heat pumps<br>(vs. conventional HVAC)</div></div>
+  <div class="ss"><div class="n">0%</div><div class="l">say extreme heat events<br>are actively shaping<br>project design today</div></div>
+</div>
+
+<div class="sl2">The Heat Resilience Gap</div>
+<div class="ib" style="background:linear-gradient(135deg,#8b3a00,#5a2400)">
+  <div class="ii">🌡️</div>
+  <div><h4>Efficiency ≠ Survivability</h4>
+  <p>A critical finding: Atlanta affordable housing has strong energy efficiency under normal conditions, but almost no design consideration for extreme heat events or power outages. Lenny Koltochnik stated that heat events and power outages "don't play any role whatsoever" in how projects are designed, calling it "business as usual." He noted Japan and South Korea are "a lot more advanced" on this, adding: "Here, we're a little bit backwards."</p></div>
+</div>
+<div class="g2">
+  <div class="qc or">
+    <div class="vl lk">Lenny Koltochnik, Atlanta Housing</div>
+    <blockquote>"I don't think the extreme heat events or power outages play any role whatsoever. It's kind of business as usual. For developers, the heat events or power outages really are insignificant... The focus is mostly on efficiency and normal conditions."</blockquote>
+    <div class="at">On whether extreme heat shapes project design</div>
+  </div>
+  <div class="qc bl">
+    <div class="vl vs">Developer Survey Respondent</div>
+    <blockquote>"Our company is committed to energy efficiency and sustainability and build all our developments with a green building certification (i.e. LEED, Enterprise Green Communities, USGBC, etc.)"</blockquote>
+    <div class="at">Resilience decisions driven by certification standards, not heat preparedness</div>
+  </div>
+</div>
+
+<div class="sl2">Policy & Financing: Where the Real Barriers Are</div>
+<div class="g2">
+  <div class="card"><h3>How Many Projects Are Affordable vs. Cost-Burdened</h3><div class="cc"><canvas id="c5"></canvas></div></div>
+  <div class="card"><h3>Average Resilience Score, Affordable vs. Cost-Burdened Projects</h3><div class="cc"><canvas id="c6"></canvas></div></div>
+</div>
+<div class="ip">
+  <h3>"If you could change one thing..." <span class="tag tp">All sources asked</span></h3>
+  <div class="rr" style="margin-bottom:1rem"><div class="rb a"></div><div><div class="vl vr" style="margin-bottom:.3rem">Vickey Roberts, Invest Atlanta</div><div class="rt">"Creating more flexible gap capital to be able to pull in the development process. Layer with multiple sources... I would definitely want to have more flexible capital to support that energy efficiency, resilience, rising construction costs. And just to make it more feasible."</div></div></div>
+  <div class="rr" style="margin-bottom:1rem"><div class="rb b"></div><div><div class="vl lk" style="margin-bottom:.3rem">Lenny Koltochnik, Atlanta Housing</div><div class="rt">"You have to refine your policies. You have to make them stricter. Impose term limits. Increase working hours for families... The onus is on the families, the participants. It's not what the public housing authority can do for them, it's what they can do for themselves."</div></div></div>
+  <div class="rr" style="margin-bottom:1rem"><div class="rb a"></div><div><div class="vl vs" style="margin-bottom:.3rem">Developer Survey</div><div class="rt">"Compliance with state (Housing Finance Agency) and local regulations can be duplicative and should be streamlined/combined."</div></div></div>
+  <div class="rr"><div class="rb b"></div><div><div class="vl vs" style="margin-bottom:.3rem">Developer/Owner/Manager Survey</div><div class="rt">"Need more gap financing given rapidly rising cost and fixed affordability mechanisms."</div></div></div>
+</div>
+<div style="background:#faf8f5;border:1px solid var(--bor);border-radius:10px;padding:1rem 1.25rem;margin:1rem 0;font-size:.82rem;color:var(--gr);line-height:1.6">
+  <strong style="color:var(--gd)">A note on these perspectives:</strong> The quotes above represent individual viewpoints from specific roles within Atlanta's housing ecosystem. A developer's experience may differ from a housing authority official's, and what holds true for one project may not apply to all. This research treats these as informed perspectives, not universal truths, and aims to identify patterns across multiple sources rather than relying on any single voice.
+</div>
+<div class="qc or">
+  <div class="vl lk">Lenny Koltochnik, Atlanta Housing</div>
+  <blockquote>"A lot of these funding programs, they're discussed, but they're not implemented. They sound good, but they don't go into effect. Especially with the cuts in the housing market right now with the Trump administration."</blockquote>
+  <div class="at">On whether subsidies influence what developers include</div>
+</div>
+<div class="qc">
+  <div class="vl lk">Lenny Koltochnik, Atlanta Housing</div>
+  <blockquote>"The subsidies are tied to the residents, but not the developers. So in a nutshell, there's very minor or minimal influence where developers are able to include in the project based on these funding programs."</blockquote>
+  <div class="at">On the disconnect between subsidies and building quality</div>
+</div>
+
+<div class="sl2">Project-Level Patterns</div>
+<div class="g2">
+  <div class="card"><h3>Does Higher Resilience Mean Lower Cost Burden? <span class="tag tg">Each dot = 1 project</span></h3><div class="cc"><canvas id="c7"></canvas></div></div>
+  <div class="card"><h3>Does Higher Resilience Mean Lower Utility Bills?</h3><div class="cc"><canvas id="c8"></canvas></div></div>
+</div>
+<div class="ib">
+  <div class="ii">📋</div>
+  <div><h4>Data Confirms What Industry Sees on the Ground</h4>
+  <p>Roberts described the payback logic: efficiency features "lower operating expenses on the back end" and produce a "slightly higher NOI" that stabilizes the property. The scatter plots confirm this, as projects with higher resilience scores cluster at lower utility costs ($140 to $175/mo vs $185 to $220/mo). But as she noted, "financing is a very tight tool," and the upfront cost gap remains the fundamental barrier.</p></div>
+</div>
+
+<div class="sl2">Atlanta's Housing Transformation</div>
+<div class="qc or">
+  <div class="vl lk">Lenny Koltochnik, Atlanta Housing</div>
+  <blockquote>"Back in the '90s, we started demolishing these old traditional public housing communities. It was part of the Olympic Legacy Program, a vision by Renee Lewis Glover. There was a lot of backlash... but now, from 1996 to 2026, we see a huge difference. These are not public housing units anymore. They're actually very nice."</blockquote>
+  <div class="at">On Atlanta's 30-year housing transformation</div>
+</div>
+<div class="qc">
+  <div class="vl lk">Lenny Koltochnik, Atlanta Housing</div>
+  <blockquote>"You don't necessarily need to move people from one location to another, as long as there's good development around you, you can actually transform communities and society."</blockquote>
+  <div class="at">On community revitalization philosophy</div>
+</div>
+
+<div class="sl2">Conclusions</div>
+<div class="mc">
+  <h3>Key Findings</h3>
+  <div class="fg">
+    <div class="fi"><p>1. Resilience is standard, but driven by incentives, not heat preparedness</p><p>Most projects score Moderate or above, driven by LIHTC incentives and green certifications. Koltochnik said heat events play "no role whatsoever" in design. However, this may not hold for every developer, as one survey respondent noted their company proactively commits to green building regardless of incentives.</p></div>
+    <div class="fi"><p>2. Efficiency saves residents money, and the data supports it</p><p>Higher resilience tiers show lower utilities ($158 vs $169/mo) and lower cost burden (29.2% vs 30.8%). Roberts confirmed the logic. That said, the sample size is small (20 projects), and other factors like unit size, location, and AMI targeting also affect these numbers.</p></div>
+    <div class="fi"><p>3. Gap financing is the missing piece</p><p>Roberts and survey respondents independently identified gap financing as the critical barrier. This was the most consistent theme across all interviews. Still, Koltochnik offered a different lens, emphasizing that policy reform and resident self-sufficiency matter just as much as funding.</p></div>
+    <div class="fi"><p>4. Subsidies reach residents, not buildings</p><p>Koltochnik said subsidies "are tied to the residents, but not the developers." This is an important distinction, though it may vary by program. Some newer incentive structures, like Georgia's QAP scoring, do tie funding to building features like green certifications.</p></div>
+    <div class="fi"><p>5. Regulatory duplication adds cost</p><p>Developers identified duplicative compliance requirements as a burden. Roberts noted Atlanta's impact and permitting fees "can be a little costly." These views reflect the developer perspective; regulators may see these requirements as necessary safeguards.</p></div>
+    <div class="fi"><p>6. True heat survivability remains unaddressed</p><p>No interviewed professional reported designing for passive survivability during power outages or extreme heat. This finding is significant but comes from a limited sample. Some individual projects, like Herndon Square Phase III with its backup generator and cooling center, are beginning to address this gap.</p></div>
+  </div>
+</div>
+<div class="ib" style="background:linear-gradient(135deg,#1a2e28,#0f2018)">
+  <div class="ii">🏛️</div>
+  <div><h4>Policy Recommendations</h4>
+  <p><strong>1. Expand gap financing</strong> targeted at heat-resilient affordable housing, as called for by both Invest Atlanta and surveyed developers.<br>
+  <strong>2. Streamline regulatory compliance</strong> between state HFAs and local housing authorities to reduce duplicative costs.<br>
+  <strong>3. Add heat survivability criteria</strong> to Georgia's QAP scoring, incentivizing passive cooling, backup power, and thermal mass beyond normal efficiency.<br>
+  <strong>4. Reframe the cost conversation:</strong> utility savings should be weighted as a scoring factor in affordable housing allocation decisions.</p></div>
+</div>
+
+
+<div class="sl2">Next Steps</div>
+<div class="mc">
+  <h3>Going Deeper</h3>
+  <p>This study establishes the baseline relationship between heat resilience and affordability across 20 Atlanta projects. The next phase of research will go deeper in several directions:</p>
+  <div class="mg">
+    <div class="mi"><div class="ic">📍</div><div class="ti">More Projects</div><div class="de">Expand the dataset beyond 20 projects to strengthen statistical confidence and capture a wider range of resilience approaches</div></div>
+    <div class="mi"><div class="ic">🔬</div><div class="ti">Verified Building Data</div><div class="de">Obtain actual building specs from developers and architects rather than relying on certification-based estimates</div></div>
+    <div class="mi"><div class="ic">🗣️</div><div class="ti">More Voices</div><div class="de">Interview architects, residents, and utility providers to understand the full picture beyond developers and housing officials</div></div>
+  </div>
+  <div style="margin-top:1.25rem">
+    <p style="font-size:.88rem;color:var(--gr);line-height:1.7">Additional areas to explore include: actual utility bill data from residents in these developments (rather than estimates), a deeper look at how Georgia's QAP scoring could be modified to incentivize heat survivability, and case studies of cities like Phoenix or Houston that are further along in designing for extreme heat in affordable housing. The goal is to move from identifying the gap to proposing specific, implementable solutions for Atlanta.</p>
+  </div>
+</div>
+<div class="fn">
+  <strong>Data sources:</strong> Invest Atlanta board resolutions, Atlanta Housing press releases, HUD FY2024 AMI data, Multi-Housing News, EarthCraft Multifamily certification standards.<br>
+  <strong>Interviews:</strong> Vickey Roberts (VP Multifamily Housing, Invest Atlanta, Apr 30 2026); Lenny Koltochnik (Atlanta Housing Authority, Apr 30 2026); coordination with Inyo Cue (Project Manager III, City of Atlanta).<br>
+  <strong>Survey:</strong> 8-question Google Forms, 2 respondents, Developer (City Lights South) and Developer/Owner/Manager (Columbia Senior Housing).<br>
+  <strong>Note:</strong> Building features based on EarthCraft / ENERGY STAR standards. Cost analysis uses 12 of 20 projects with verified TDC. Interview quotes from recorded/transcribed conversations.<br>
+  Independent Study, The Lovett School, Atlanta, GA, Spring 2026
+</div>
+</div>
+
+<script>
+Chart.defaults.font.family="'DM Sans',sans-serif";Chart.defaults.font.size=12;Chart.defaults.color='#6b7b75';
+const t=['Baseline','Moderate','High','Very High'],tc=['#b0bab5','#8fbf9f','#5b9279','#2d6a4f'],tb=['#8a9490','#6da07f','#3d7259','#1a3a2e'];
+new Chart(document.getElementById('c1'),{type:'bar',data:{labels:t,datasets:[{data:[30.8,33.0,29.2,33.3],backgroundColor:tc,borderColor:tb,borderWidth:1.5,borderRadius:6,barPercentage:.7}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'%'}}},scales:{y:{beginAtZero:true,max:45,ticks:{callback:v=>v+'%'},grid:{color:'#f0ede8'}},x:{grid:{display:false}}}}});
+new Chart(document.getElementById('c2'),{type:'bar',data:{labels:t,datasets:[{data:[169,179,174,158],backgroundColor:['#ffb347','#f0944d','#e07333','#c45a1a'],borderColor:['#e09530','#d07838','#b85a22','#a04512'],borderWidth:1.5,borderRadius:6,barPercentage:.7}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y+'/mo'}}},scales:{y:{beginAtZero:true,max:250,ticks:{callback:v=>'$'+v},grid:{color:'#f0ede8'}},x:{grid:{display:false}}}}});
+new Chart(document.getElementById('c3'),{type:'bar',data:{labels:t,datasets:[{data:[226180,314801,395856,398483],backgroundColor:['#a8d0e6','#6baed6','#3d8db5','#2171b5'],borderColor:['#88b0c6','#4b8eb6','#2d6d95','#115195'],borderWidth:1.5,borderRadius:6,barPercentage:.7}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y.toLocaleString()}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'$'+(v/1000)+'K'},grid:{color:'#f0ede8'}},x:{grid:{display:false}}}}});
+new Chart(document.getElementById('c4'),{type:'doughnut',data:{labels:t,datasets:[{data:[4,9,5,2],backgroundColor:tc,borderColor:'#fff',borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:'45%',plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true,pointStyle:'rectRounded'}}}}});
+new Chart(document.getElementById('c5'),{type:'doughnut',data:{labels:['Affordable (≤30%)','Cost-Burdened (>30%)'],datasets:[{data:[8,12],backgroundColor:['#5b9279','#e07333'],borderColor:'#fff',borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:'45%',plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true,pointStyle:'rectRounded'}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+' ('+Math.round(c.parsed/20*100)+'%)'}}}}});
+new Chart(document.getElementById('c6'),{type:'bar',data:{labels:['Affordable','Cost-Burdened'],datasets:[{data:[9.0,9.3],backgroundColor:['#5b9279','#e07333'],borderColor:['#3d7259','#b85a22'],borderWidth:1.5,borderRadius:6,barPercentage:.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:14,title:{display:true,text:'Avg Resilience Score (out of 14)'},grid:{color:'#f0ede8'}},x:{grid:{display:false}}}}});
+const sd=[{x:11,y:29.6},{x:10,y:25.9},{x:7,y:40.4},{x:11,y:28.2},{x:9,y:31.4},{x:11,y:27.1},{x:9,y:32.5},{x:9,y:36},{x:9,y:32.1},{x:11,y:34.9},{x:7,y:29.3},{x:8,y:31.7},{x:9,y:31.4},{x:12,y:33.9},{x:12,y:32.6},{x:9,y:37.7},{x:6,y:23.7},{x:7,y:29.6},{x:9,y:20.7},{x:8,y:43.5}];
+new Chart(document.getElementById('c7'),{type:'scatter',data:{datasets:[{data:sd,backgroundColor:'rgba(91,146,121,.7)',borderColor:'#2d4a3e',borderWidth:1.5,pointRadius:7,pointHoverRadius:10}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'HRI: '+c.parsed.x+', Burden: '+c.parsed.y.toFixed(1)+'%'}}},scales:{x:{min:5,max:14,title:{display:true,text:'Heat Resilience Score'},grid:{color:'#f0ede8'}},y:{min:15,max:50,title:{display:true,text:'% of Income Spent on Housing'},ticks:{callback:v=>v+'%'},grid:{color:'#f0ede8'}}}}});
+const ud=[{x:11,y:180},{x:10,y:190},{x:7,y:220},{x:11,y:165},{x:9,y:185},{x:11,y:165},{x:9,y:175},{x:9,y:195},{x:9,y:180},{x:11,y:170},{x:7,y:190},{x:8,y:185},{x:9,y:185},{x:12,y:175},{x:12,y:140},{x:9,y:165},{x:6,y:110},{x:7,y:155},{x:9,y:155},{x:8,y:190}];
+new Chart(document.getElementById('c8'),{type:'scatter',data:{datasets:[{data:ud,backgroundColor:'rgba(224,115,51,.7)',borderColor:'#8b4513',borderWidth:1.5,pointRadius:7,pointHoverRadius:10,pointStyle:'rectRot'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'HRI: '+c.parsed.x+', Utilities: $'+c.parsed.y+'/mo'}}},scales:{x:{min:5,max:14,title:{display:true,text:'Heat Resilience Score'},grid:{color:'#f0ede8'}},y:{min:80,max:240,title:{display:true,text:'Monthly Utilities ($)'},ticks:{callback:v=>'$'+v},grid:{color:'#f0ede8'}}}}});
+</script>
+</body>
+</html>
